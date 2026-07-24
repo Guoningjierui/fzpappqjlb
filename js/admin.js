@@ -28,32 +28,79 @@ document.addEventListener('DOMContentLoaded', function() {
   initConfirmModal();
 });
 
-// 加载数据（优先从 localStorage，否则用 config.js 默认值）
+// 加载数据（从 config.js 加载）
 function loadData() {
-  const savedStudents = localStorage.getItem('pingao_students');
-  const savedEvents = localStorage.getItem('pingao_events');
-
-  if (savedStudents) {
-    students = JSON.parse(savedStudents);
-  } else {
-    students = CONFIG.students || [];
-  }
-
-  if (savedEvents) {
-    events = JSON.parse(savedEvents);
-  } else {
-    events = CONFIG.events || [];
-  }
+  students = CONFIG.students || [];
+  events = CONFIG.events || [];
 
   renderStudentsTable();
   renderEventsTable();
 }
 
-// 保存数据到 localStorage
+// 保存数据（仅更新内存中的数据，需导出配置文件才能持久化）
 function saveData() {
-  localStorage.setItem('pingao_students', JSON.stringify(students));
-  localStorage.setItem('pingao_events', JSON.stringify(events));
-  showToast('数据已保存');
+  showToast('数据已保存，记得导出配置文件');
+}
+
+// 导出完整配置文件
+function exportConfig() {
+  // 创建新的配置对象，包含当前数据
+  const newConfig = {
+    ...CONFIG,
+    students: students,
+    events: events
+  };
+
+  // 生成 config.js 内容
+  const content = `// 乒奥乒乓球俱乐部官网配置文件
+// 修改此文件即可更新网站内容，无需修改其他代码
+
+const CONFIG = ${JSON.stringify(newConfig, null, 2)};`;
+
+  // 创建下载链接
+  const blob = new Blob([content], { type: 'text/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'config.js';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast('配置文件已导出');
+}
+
+// 导出学员数据
+function exportStudents() {
+  const content = JSON.stringify(students, null, 2);
+  const blob = new Blob([content], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'students.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast('学员数据已导出');
+}
+
+// 导出活动数据
+function exportEvents() {
+  const content = JSON.stringify(events, null, 2);
+  const blob = new Blob([content], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'events.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast('活动数据已导出');
 }
 
 // 导航切换

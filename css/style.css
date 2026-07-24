@@ -1731,6 +1731,11 @@ html {
   color: #ff6b35;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
 /* 按钮样式 */
 .btn-primary {
   background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);

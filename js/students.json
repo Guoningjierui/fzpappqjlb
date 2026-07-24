@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "孙笑薇",
+    "age": 15,
+    "level": "国家队",
+    "image": "iamges/student1.jpg",
+    "milestones": [
+      {
+        "date": "2026-07-24",
+        "title": "进入国家队",
+        "description": ""
+      }
+    ],
+    "achievements": []
+  }
+]

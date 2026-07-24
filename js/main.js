@@ -37,22 +37,41 @@ document.addEventListener('DOMContentLoaded', function() {
 let students = [];
 let events = [];
 
-// 加载数据（优先从localStorage，否则用config.js默认值）
+// 活动图片轮播全局变量
+let eventCarouselIndex = 0;
+let eventTotalSlides = 0;
+
+// 加载数据（从config.js加载）
 function loadData() {
-  const savedStudents = localStorage.getItem('pingao_students');
-  const savedEvents = localStorage.getItem('pingao_events');
+  students = CONFIG.students || [];
+  events = CONFIG.events || [];
+}
 
-  if (savedStudents) {
-    students = JSON.parse(savedStudents);
-  } else {
-    students = CONFIG.students || [];
-  }
+// 活动图片轮播函数
+function initEventCarousel(slideCount) {
+  eventCarouselIndex = 0;
+  eventTotalSlides = slideCount;
+}
 
-  if (savedEvents) {
-    events = JSON.parse(savedEvents);
-  } else {
-    events = CONFIG.events || [];
+function goToCarousel(index) {
+  eventCarouselIndex = index;
+  const slide = document.getElementById('event-carousel-slide');
+  if (slide) {
+    slide.style.transform = `translateX(-${eventCarouselIndex * 100}%)`;
   }
+  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === eventCarouselIndex);
+  });
+}
+
+function carouselPrev() {
+  eventCarouselIndex = (eventCarouselIndex - 1 + eventTotalSlides) % eventTotalSlides;
+  goToCarousel(eventCarouselIndex);
+}
+
+function carouselNext() {
+  eventCarouselIndex = (eventCarouselIndex + 1) % eventTotalSlides;
+  goToCarousel(eventCarouselIndex);
 }
 
 // 渲染导航菜单
@@ -504,29 +523,6 @@ function openEventModal(event) {
           `).join('')}
         </div>
       </div>
-      <script>
-        // 活动图片轮播逻辑
-        let eventCarouselIndex = 0;
-        const eventTotalSlides = ${event.images.length};
-        
-        function goToCarousel(index) {
-          eventCarouselIndex = index;
-          document.getElementById('event-carousel-slide').style.transform = \`translateX(-\${eventCarouselIndex * 100}%)\`;
-          document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === eventCarouselIndex);
-          });
-        }
-        
-        function carouselPrev() {
-          eventCarouselIndex = (eventCarouselIndex - 1 + eventTotalSlides) % eventTotalSlides;
-          goToCarousel(eventCarouselIndex);
-        }
-        
-        function carouselNext() {
-          eventCarouselIndex = (eventCarouselIndex + 1) % eventTotalSlides;
-          goToCarousel(eventCarouselIndex);
-        }
-      </script>
     `
     : '';
   
@@ -606,6 +602,11 @@ function openEventModal(event) {
       </ul>
     </div>
   `;
+  
+  // 初始化轮播
+  if (event.images && event.images.length > 0) {
+    initEventCarousel(event.images.length);
+  }
   
   modal.classList.add('show');
 }
