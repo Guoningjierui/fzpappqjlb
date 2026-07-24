@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乒奥乒乓球俱乐部</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-table-tennis"></i>
+        <span>乒奥乒乓球俱乐部</span>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <!-- 导航项由JS动态生成 -->
+      </ul>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 首页Banner -->
+  <section id="home" class="banner">
+    <div class="banner-content">
+      <div class="banner-slide">
+        <!-- 轮播内容由JS动态生成 -->
+      </div>
+      <div class="banner-dots" id="banner-dots"></div>
+    </div>
+  </section>
+
+  <!-- 教练简介 -->
+  <section id="coaches" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-users"></i>
+        教练简介
+      </h2>
+      <div class="coaches-grid" id="coaches-grid">
+        <!-- 教练卡片由JS动态生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 学员风采 -->
+  <section id="academies" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-users"></i>
+        学员风采
+      </h2>
+      <div class="academies-container" id="academies-container">
+        <!-- 学院分组由JS动态生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 活动日历 -->
+  <section id="events" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-calendar-alt"></i>
+        活动日历
+      </h2>
+      <div class="events-list" id="events-list">
+        <!-- 活动列表由JS动态生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 课程介绍 -->
+  <section id="courses" class="section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-book-open"></i>
+        课程介绍
+      </h2>
+      <div class="courses-grid" id="courses-grid">
+        <!-- 课程卡片由JS动态生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-map-marker-alt"></i>
+        联系我们
+      </h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h3>联系电话</h3>
+            <p id="contact-phone"></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-pin"></i>
+          <div>
+            <h3>场馆地址</h3>
+            <p id="contact-address"></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-qq"></i>
+          <div>
+            <h3>QQ咨询</h3>
+            <p id="contact-qq"></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-weixin"></i>
+          <div>
+            <h3>微信号</h3>
+            <p id="contact-wechat"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 底部 -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 乒奥乒乓球俱乐部 版权所有</p>
+    </div>
+  </footer>
+
+  <!-- 右侧悬浮联系栏 -->
+  <div class="floating-contact" id="floating-contact">
+    <!-- 悬浮联系内容由JS动态生成 -->
+  </div>
+
+  <!-- 图片预览弹窗 -->
+  <div class="image-modal" id="image-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <img src="" alt="" class="modal-image" id="modal-image">
+    <button class="modal-close" id="modal-close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- 学员成长路径弹窗 -->
+  <div class="detail-modal" id="student-modal">
+    <div class="modal-overlay" id="student-modal-overlay"></div>
+    <div class="modal-content" id="student-modal-content">
+      <button class="modal-close" id="student-modal-close">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="student-modal-body" id="student-modal-body">
+        <!-- 学员详情由JS动态生成 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 活动详情弹窗 -->
+  <div class="detail-modal" id="event-modal">
+    <div class="modal-overlay" id="event-modal-overlay"></div>
+    <div class="modal-content" id="event-modal-content">
+      <button class="modal-close" id="event-modal-close">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="event-modal-body" id="event-modal-body">
+        <!-- 活动详情由JS动态生成 -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
